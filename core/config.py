@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     DB_DRIVER:str
     DB_DIALECT:str
     KAFKA_BOOTSTRAP_SERVERS: str
+    api:str
     
 
 
