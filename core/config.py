@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     DB_DIALECT:str
     KAFKA_BOOTSTRAP_SERVERS: str
     api:str
+    email:str
     
 
 

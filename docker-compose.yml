@@ -17,4 +17,13 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LOG_DIRS: /tmp/kraft-combined_logs
+    
+
+
+  redis:
+   image: redis:latest
+   container_name: redis
+   ports:
+     - "6379:6379"
+
        
