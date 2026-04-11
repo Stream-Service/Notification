@@ -1,8 +1,9 @@
 from confluent_kafka import Producer
 import json
+from core.config import setting
 
 producer_config= {
-    "bootstrap.servers":"localhost:9092",
+    "bootstrap.servers": setting.KAFKA_BOOTSTRAP_SERVERS,
     "message.max.bytes": 200000000
 }
 
@@ -18,6 +19,7 @@ producer=Producer(producer_config)
 def send_email_message(to, subject, body): 
     email_data = { "to": to, "subject": subject, "body": body } 
 
+     
      
 
     value=json.dumps(email_data).encode("utf-8")

@@ -1,14 +1,16 @@
 from fastapi import FastAPI
-from notifications_template.routes import router as noti_router
-from database_template.template import router as db_router
-from tracker import start_consumer
+# from notifications_template.routes import router as noti_router
+# from database_template.template import router as db_router
+# # from tracker import start_consumer
 from producers.producer_admin import send_email_message
- 
-
+from fastapi.middleware.cors import CORSMiddleware
+import router
+from contextlib import asynccontextmanager
+import email_sender
 import asyncio 
 from pydantic import BaseModel
  
- 
+import threading
 
 # Define request body schema
 class EmailRequest(BaseModel):
@@ -22,13 +24,30 @@ from core.database import engine,Base_model
 Base_model.metadata.create_all(bind=engine)
 
 
-app=FastAPI()
-app.include_router(noti_router)
-app.include_router(db_router)
 
-@app.on_event("startup") 
-async def startup_event():
-    start_consumer() 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+     
+    threading.Thread(target=router.start, daemon=True).start()
+     
+    threading.Thread(target=email_sender.start, daemon=True).start()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
+ 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # allow everything for testing
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+ 
+
+ 
 
 
 

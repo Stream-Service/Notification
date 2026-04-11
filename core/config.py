@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     KAFKA_BOOTSTRAP_SERVERS: str
     api:str
     email:str
+    REDIS_PORT:str
+    REDIS_SERVER:str
     
 
 

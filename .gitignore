@@ -1,3 +1,5 @@
 .env
+new-docker-compose.yml
  
 notification/
+.gitignore
