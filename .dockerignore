@@ -3,3 +3,4 @@
 __pycache__
 docker-compose.yml
 new-docker-compose.yml
+.github/workflows/cicd.yaml

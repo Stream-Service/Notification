@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-notification-deployment
+spec:
+  selector:
+    matchLabels:
+      app: myapp-notification
+  template:
+    metadata:
+      labels:
+        app: myapp-notification
+    spec:
+      containers:
+      - name: myapp-notification-container
+        image: hritik2345/stream-service-notification:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8004
+        envFrom:
+           - secretRef:
+               name: my-noti-secret

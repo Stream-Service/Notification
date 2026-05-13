@@ -3,3 +3,4 @@ new-docker-compose.yml
  
 notification/
 .gitignore
+k8s/secrets.yaml
